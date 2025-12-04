@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+*.venv
+ENV/
+
+# Data files (large files - don't commit these!)
+embeddings.npy
+documents.pkl
+faiss_index.faiss
+*.npy
+*.pkl
+*.faiss
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
