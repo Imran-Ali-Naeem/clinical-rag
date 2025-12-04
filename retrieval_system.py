@@ -1,3 +1,4 @@
+import os
 import pickle
 import numpy as np
 import faiss
@@ -8,15 +9,21 @@ class MedicalRAGSystem:
     def __init__(self):
         print("🚀 Loading Medical RAG System...")
         
-        # Load documents
-        with open('documents.pkl', 'rb') as f:
+        # Get the directory where this script is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        # Load documents with absolute path
+        documents_path = os.path.join(current_dir, 'documents.pkl')
+        with open(documents_path, 'rb') as f:
             self.documents = pickle.load(f)
         
-        # Load embeddings
-        self.embeddings = np.load('embeddings.npy')
+        # Load embeddings with absolute path
+        embeddings_path = os.path.join(current_dir, 'embeddings.npy')
+        self.embeddings = np.load(embeddings_path)
         
-        # Load FAISS index
-        self.index = faiss.read_index('faiss_index.faiss')
+        # Load FAISS index with absolute path
+        faiss_path = os.path.join(current_dir, 'faiss_index.faiss')
+        self.index = faiss.read_index(faiss_path)
         
         # Initialize BM25
         tokenized_docs = [doc.split() for doc in self.documents]
