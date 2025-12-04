@@ -9,15 +9,6 @@ __pycache__/
 venv/
 *.venv
 ENV/
-
-# Data files (large files - don't commit these!)
-embeddings.npy
-documents.pkl
-faiss_index.faiss
-*.npy
-*.pkl
-*.faiss
-
 # Environment variables
 .env
 .env.local
