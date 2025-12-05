@@ -1,0 +1,113 @@
+BM25 (Keyword Search on Steroids):
+How it works: Looks for exact keywords in your question, but also considers:
+How often the word appears in the document
+How common the word is overall (rare words get higher scores)
+Document length
+Think of it like: A super-powered Ctrl+F search
+Example:
+Query: "How to bake a chocolate cake?"
+BM25 will match documents containing: "bake", "chocolate", "cake"
+It won't understand that "dessert recipe" or "making a brownie" might be relevant if those exact words aren't there.
+
+
+Dense Embeddings (Semantic Search):
+How it works: Converts both your question and documents into numerical vectors (embeddings) that capture meaning
+Matches by meaning/semantics, not just keywords
+Think of it like: Finding similar ideas rather than similar words
+Example:
+Query: "How to bake a chocolate cake?" → gets converted to a vector
+Document: "A guide to making cocoa desserts" → gets converted to a vector
+Even without keyword overlap, their vectors will be close because the meaning is similar!
+
+
+
+
+
+
+Real Example
+Query: "I want to adopt a canine companion"
+BM25 might find:
+"How to adopt a dog" ✅ (has "adopt" and "dog")
+"Canine diseases and treatment" ❌ (wrong topic but has "canine")
+"Pet adoption process" ❌ (no "canine" or "dog" → misses it!)
+
+Dense Embeddings might find:
+"How to adopt a dog" ✅ (understands "canine" = "dog")
+"Pet adoption process" ✅ (understands "adopt a companion" = "adoption")
+"Getting a puppy from shelter" ✅ (similar meaning)
+"Canine diseases" ❌ (correctly ignores as different topic)
+
+When to Use Which?
+Use BM25 when:
+You need precise keyword matching (product codes, names, jargon)
+You have limited computational resources
+Your queries are specific technical terms
+
+Use Dense Embeddings when:
+Users ask questions in natural language
+Synonyms are important (car/vehicle/automobile)
+You want to understand user intent
+
+
+
+
+
+
+
+
+
+Detailed Comparison
+1. all-MiniLM-L6-v2 (The Speedster)
+Size: 80MB, 6 transformer layers
+Speed: ⚡⚡⚡⚡⚡ (Very fast)
+Accuracy: 7/10
+Use case: When you need fast results with decent quality
+Example scenario:
+You're building a customer support chatbot that needs to answer quickly:
+Query: "My order hasn't arrived"
+MiniLM finds: "delivery status", "track package", "late shipment"
+Response time: ~20ms per query
+Hardware: Works on a basic laptop
+
+2. all-mpnet-base-v2 (The Perfectionist)
+Size: 420MB, 12 transformer layers
+Speed: ⚡⚡⚡ (Good but slower than MiniLM)
+Accuracy: 9/10
+Use case: When you need best accuracy for important tasks
+Example scenario:
+Legal document search system:
+Query: "breach of contract terms"
+mpnet finds: "violation of agreement clauses", "contractual non-compliance", "terms infringement"
+Response time: ~80ms per query
+Hardware: Needs decent server/GPU for best performance
+
+
+
+
+
+
+
+
+In your pipeline above, the basic cleaning (convert to string, remove nulls) is happening in this part of the third cell you showed (the one where you build documents):
+if isinstance(data, list):
+    for record in data:
+        documents.append(str(record))
+else:
+    documents.append(str(data))
+
+
+
+
+
+
+Dense Embeddings:
+You are creating dense embeddings in the cell where you run:
+embeddings = embed_model.encode(documents, convert_to_numpy=True, show_progress_bar=True)
+✅ This is the “Generate Embeddings” cell (the updated Cell 9 in the SentenceTransformers version).
+
+
+
+
+
+
+
